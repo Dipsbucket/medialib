@@ -1,36 +1,36 @@
-package com.application.server.data.service;
+package com.application.server.service;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.vaadin.artur.helpers.CrudService;
 
-import com.application.data.service.UserRepository;
-import com.application.server.data.entity.User;
+import com.application.server.repository.AbstractJpaRepository;
 
 @Service
-public class UserService extends CrudService<User, Integer> {
+public abstract class AbstractCrudService<T> extends CrudService<T, Integer> {
 
 	// ***********************************************************************************************************
 	// Section de code : Variables
 	// ***********************************************************************************************************
 
-	private final UserRepository repository;
+	protected final AbstractJpaRepository<T> repository;
 
 	// ***********************************************************************************************************
 	// Section de code : Constructeurs
 	// ***********************************************************************************************************
 
-	public UserService(@Autowired UserRepository repository) {
+	public AbstractCrudService(@Autowired AbstractJpaRepository<T> repository) {
 		this.repository = repository;
 	}
 
 	// ***********************************************************************************************************
-	// Section de code : Surcharges
+	// Section de code : Constructeurs
 	// ***********************************************************************************************************
 
-	@Override
-	protected UserRepository getRepository() {
-		return this.repository;
+	public List<T> findAll() {
+		return this.getRepository().findAll();
 	}
 
 }

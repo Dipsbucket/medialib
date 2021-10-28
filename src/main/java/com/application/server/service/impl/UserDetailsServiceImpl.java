@@ -1,4 +1,4 @@
-package com.application.server.data.service.impl;
+package com.application.server.service.impl;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.application.data.service.UserRepository;
 import com.application.server.data.entity.User;
+import com.application.server.repository.UserRepository;
 
 import utils.CollectionUtils;
 

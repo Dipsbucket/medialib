@@ -6,7 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.application.data.service.UserRepository;
+import com.application.server.repository.UserRepository;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 
 @SpringComponent
