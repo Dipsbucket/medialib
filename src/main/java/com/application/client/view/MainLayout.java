@@ -1,13 +1,13 @@
-package com.application.views;
+package com.application.client.view;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.application.client.view.about.AboutView;
+import com.application.client.view.helloworld.HelloWorldView;
 import com.application.server.data.AuthenticatedUser;
 import com.application.server.data.entity.User;
-import com.application.views.about.AboutView;
-import com.application.views.helloworld.HelloWorldView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;

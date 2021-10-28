@@ -1,6 +1,7 @@
-package com.application.views.helloworld;
+package com.application.client.view.helloworld;
 
-import com.application.views.MainLayout;
+import com.application.client.component.ImageCard;
+import com.application.client.view.MainLayout;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.Tag;
