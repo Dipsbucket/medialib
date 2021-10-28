@@ -4,22 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.application.client.component.HeaderContainer;
+import com.application.client.presenter.DocumentaryImageGridPresenter;
+import com.application.client.presenter.HentaiImageGridPresenter;
+import com.application.client.presenter.MovieImageGridPresenter;
+import com.application.client.presenter.PornstarImageGridPresenter;
+import com.application.client.presenter.SpectacleImageGridPresenter;
 import com.application.client.view.about.AboutView;
 import com.application.client.view.helloworld.HelloWorldView;
 import com.application.server.data.AuthenticatedUser;
 import com.application.server.data.entity.User;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.AppLayout;
-import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.avatar.Avatar;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.contextmenu.ContextMenu;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Footer;
-import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H3;
-import com.vaadin.flow.component.html.Header;
 import com.vaadin.flow.component.html.ListItem;
 import com.vaadin.flow.component.html.Nav;
 import com.vaadin.flow.component.html.Span;
@@ -28,72 +32,96 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.auth.AccessAnnotationChecker;
 
+import utils.CastUtils;
+
 /**
  * The main view is a top-level placeholder for other views.
  */
 @PageTitle("Main")
 public class MainLayout extends AppLayout {
 
-	public static class MenuItemInfo {
+	// ***********************************************************************************************************
+	// Section de code : Variables
+	// ***********************************************************************************************************
 
-		private String text;
-		private String iconClass;
-		private Class<? extends Component> view;
+	private static final long serialVersionUID = 2718947914251598560L;
 
-		public MenuItemInfo(String text, String iconClass, Class<? extends Component> view) {
-			this.text = text;
-			this.iconClass = iconClass;
-			this.view = view;
-		}
+	private final AuthenticatedUser authenticatedUser;
+	private final AccessAnnotationChecker accessChecker;
 
-		public String getText() {
-			return this.text;
-		}
+	private PornstarImageGridPresenter pornstarImageGridPresenter;
+	private MovieImageGridPresenter movieImageGridPresenter;
+	private DocumentaryImageGridPresenter documentaryImageGridPresenter;
+	private HentaiImageGridPresenter hentaiImageGridPresenter;
+	private SpectacleImageGridPresenter spectacleImageGridPresenter;
 
-		public String getIconClass() {
-			return this.iconClass;
-		}
+	private HeaderContainer header;
 
-		public Class<? extends Component> getView() {
-			return this.view;
-		}
+	// ***********************************************************************************************************
+	// Section de code : Constructeurs
+	// ***********************************************************************************************************
 
-	}
-
-	private H1 viewTitle;
-
-	private AuthenticatedUser authenticatedUser;
-	private AccessAnnotationChecker accessChecker;
-
-	public MainLayout(AuthenticatedUser authenticatedUser, AccessAnnotationChecker accessChecker) {
+	public MainLayout(AuthenticatedUser authenticatedUser, AccessAnnotationChecker accessChecker,
+			@Autowired PornstarImageGridPresenter pornstarImageGridPresenter,
+			@Autowired MovieImageGridPresenter movieImageGridPresenter,
+			@Autowired DocumentaryImageGridPresenter documentaryImageGridPresenter,
+			@Autowired HentaiImageGridPresenter hentaiImageGridPresenter,
+			@Autowired SpectacleImageGridPresenter spectacleImageGridPresenter) {
 		this.authenticatedUser = authenticatedUser;
 		this.accessChecker = accessChecker;
 
+		this.pornstarImageGridPresenter = pornstarImageGridPresenter;
+		this.movieImageGridPresenter = movieImageGridPresenter;
+		this.documentaryImageGridPresenter = documentaryImageGridPresenter;
+		this.hentaiImageGridPresenter = hentaiImageGridPresenter;
+		this.spectacleImageGridPresenter = spectacleImageGridPresenter;
+
+		this.header = new HeaderContainer();
+
 		this.setPrimarySection(Section.DRAWER);
-		this.addToNavbar(true, this.createHeaderContent());
+		this.addToNavbar(true, this.header);
 		this.addToDrawer(this.createDrawerContent());
 	}
 
-	private Component createHeaderContent() {
-		DrawerToggle toggle = new DrawerToggle();
-		toggle.addClassName("text-secondary");
-		toggle.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
-		toggle.getElement().setAttribute("aria-label", "Menu toggle");
+	// ***********************************************************************************************************
+	// Section de code : Surcharges
+	// ***********************************************************************************************************
 
-		this.viewTitle = new H1();
-		this.viewTitle.addClassNames("m-0", "text-l");
+	@Override
+	protected void afterNavigation() {
+		super.afterNavigation();
+		this.header.getViewTitle().setText(this.getCurrentPageTitle());
+		this.manageViewsAfterNavigation(this.getContent());
+	}
 
-		Header header = new Header(toggle, this.viewTitle);
-		header.addClassNames("bg-base", "border-b", "border-contrast-10", "box-border", "flex", "h-xl", "items-center",
-				"w-full");
-		return header;
+	// ***********************************************************************************************************
+	// Section de code : Méthodes
+	// ***********************************************************************************************************
+
+	private void manageViewsAfterNavigation(Component component) {
+		if (component instanceof PornstarImageGridView) {
+			final PornstarImageGridView view = CastUtils.uncheckedCast(component);
+			this.pornstarImageGridPresenter.initView(view);
+		} else if (component instanceof MovieImageGridView) {
+			final MovieImageGridView view = CastUtils.uncheckedCast(component);
+			this.movieImageGridPresenter.initView(view);
+		} else if (component instanceof DocumentaryImageGridView) {
+			final DocumentaryImageGridView view = CastUtils.uncheckedCast(component);
+			this.documentaryImageGridPresenter.initView(view);
+		} else if (component instanceof HentaiImageGridView) {
+			final HentaiImageGridView view = CastUtils.uncheckedCast(component);
+			this.hentaiImageGridPresenter.initView(view);
+		} else if (component instanceof SpectacleImageGridView) {
+			final SpectacleImageGridView view = CastUtils.uncheckedCast(component);
+			this.spectacleImageGridPresenter.initView(view);
+		}
 	}
 
 	private Component createDrawerContent() {
-		H2 appName = new H2("medialib");
+		final H2 appName = new H2("My App");
 		appName.addClassNames("flex", "items-center", "h-xl", "m-0", "px-m", "text-m");
 
-		com.vaadin.flow.component.html.Section section = new com.vaadin.flow.component.html.Section(appName,
+		final com.vaadin.flow.component.html.Section section = new com.vaadin.flow.component.html.Section(appName,
 				this.createNavigation(), this.createFooter());
 		section.addClassNames("flex", "flex-col", "items-stretch", "max-h-full", "min-h-full");
 		return section;
@@ -123,10 +151,15 @@ public class MainLayout extends AppLayout {
 	private List<RouterLink> createLinks() {
 		MenuItemInfo[] menuItems = new MenuItemInfo[] { //
 				new MenuItemInfo("Hello World", "la la-th-list", HelloWorldView.class), //
-
+				new MenuItemInfo("Movies", "la la-th-list", MovieImageGridView.class),
+				new MenuItemInfo("Documentaries", "la la-th-list", DocumentaryImageGridView.class),
+				new MenuItemInfo("Spectacles", "la la-th-list", SpectacleImageGridView.class),
+				new MenuItemInfo("Pornstars", "la la-th-list", PornstarImageGridView.class),
+				new MenuItemInfo("Hentais", "la la-th-list", HentaiImageGridView.class),
 				new MenuItemInfo("About", "la la-file", AboutView.class), //
 
 		};
+
 		List<RouterLink> links = new ArrayList<>();
 		for (MenuItemInfo menuItemInfo : menuItems) {
 			if (this.accessChecker.hasAccess(menuItemInfo.getView())) {
@@ -134,6 +167,7 @@ public class MainLayout extends AppLayout {
 			}
 
 		}
+
 		return links;
 	}
 
@@ -182,12 +216,6 @@ public class MainLayout extends AppLayout {
 		}
 
 		return layout;
-	}
-
-	@Override
-	protected void afterNavigation() {
-		super.afterNavigation();
-		this.viewTitle.setText(this.getCurrentPageTitle());
 	}
 
 	private String getCurrentPageTitle() {
