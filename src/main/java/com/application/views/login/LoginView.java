@@ -1,4 +1,4 @@
-package com.example.application.views.login;
+package com.application.views.login;
 
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.login.LoginOverlay;

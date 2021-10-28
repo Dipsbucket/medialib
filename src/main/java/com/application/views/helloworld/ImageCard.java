@@ -1,4 +1,4 @@
-package com.example.application.views.helloworld;
+package com.application.views.helloworld;
 
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;

@@ -1,5 +1,6 @@
-package com.example.application.views.helloworld;
+package com.application.views.helloworld;
 
+import com.application.views.MainLayout;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.Tag;
@@ -10,7 +11,6 @@ import com.vaadin.flow.component.template.Id;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
-import com.example.application.views.MainLayout;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 
 @PageTitle("Hello World")
