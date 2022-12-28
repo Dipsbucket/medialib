@@ -10,6 +10,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class TomcatFactoryCustomizer implements WebServerFactoryCustomizer<TomcatServletWebServerFactory> {
 
+	// ***********************************************************************************************************
+	// Section de code : Surcharges
+	// ***********************************************************************************************************
+
 	@Override
 	public void customize(TomcatServletWebServerFactory factory) {
 		factory.setContextPath("");

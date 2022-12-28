@@ -2,15 +2,16 @@ package com.application.client.presenter;
 
 import org.springframework.stereotype.Component;
 
-import com.application.server.data.entity.Hentai;
-import com.application.server.service.HentaiService;
+import com.application.client.component.dialog.JavObjectView;
+import com.application.server.data.entity.Jav;
+import com.application.server.service.JavService;
 
 import utils.CastUtils;
 
 @Component
-public class HentaiImageGridPresenter extends AbstractEntityImageGridPresenter<Hentai> {
+public class JavImageGridPresenter extends AbstractEntityImageGridPresenter<Jav> {
 
-	public interface HentaiImageGridDisplay extends AbstractEntityImageGridDisplay<Hentai> {
+	public interface JavImageGridDisplay extends AbstractEntityImageGridDisplay<Jav> {
 
 	}
 
@@ -18,7 +19,7 @@ public class HentaiImageGridPresenter extends AbstractEntityImageGridPresenter<H
 	// Section de code : Constructeurs
 	// ***********************************************************************************************************
 
-	public HentaiImageGridPresenter(HentaiService service) {
+	public JavImageGridPresenter(JavService service) {
 		super(service);
 	}
 
@@ -27,8 +28,13 @@ public class HentaiImageGridPresenter extends AbstractEntityImageGridPresenter<H
 	// ***********************************************************************************************************
 
 	@Override
-	public HentaiImageGridDisplay getView() {
+	public JavImageGridDisplay getView() {
 		return CastUtils.uncheckedCast(this.view);
+	}
+
+	@Override
+	protected JavObjectView createEntityObjectView() {
+		return new JavObjectView(this.getView().getContext());
 	}
 
 }

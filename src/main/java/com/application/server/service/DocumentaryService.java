@@ -9,7 +9,7 @@ import com.application.server.repository.DocumentaryRepository;
 import utils.CastUtils;
 
 @Service
-public class DocumentaryService extends AbstractCrudService<Documentary> {
+public class DocumentaryService extends AbstractEntityService<Documentary> {
 
 	// ***********************************************************************************************************
 	// Section de code : Constructeurs

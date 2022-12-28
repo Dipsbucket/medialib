@@ -2,6 +2,7 @@ package com.application.client.presenter;
 
 import org.springframework.stereotype.Component;
 
+import com.application.client.component.dialog.DocumentaryObjectView;
 import com.application.server.data.entity.Documentary;
 import com.application.server.service.DocumentaryService;
 
@@ -29,6 +30,11 @@ public class DocumentaryImageGridPresenter extends AbstractEntityImageGridPresen
 	@Override
 	public DocumentaryImageGridDisplay getView() {
 		return CastUtils.uncheckedCast(this.view);
+	}
+
+	@Override
+	protected DocumentaryObjectView createEntityObjectView() {
+		return new DocumentaryObjectView(this.getView().getContext());
 	}
 
 }

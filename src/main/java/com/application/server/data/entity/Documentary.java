@@ -1,5 +1,6 @@
 package com.application.server.data.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -10,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import utils.CastUtils;
 
 @Entity
 @Table(name = "documentary")
@@ -72,6 +75,7 @@ public class Documentary extends AbstractEntity {
 		this.watched = watched;
 		this.owned = owned;
 		this.liked = liked;
+		this.link = link;
 		this.imagePath = imagePath;
 	}
 
@@ -109,14 +113,32 @@ public class Documentary extends AbstractEntity {
 		this.imagePath = path;
 	}
 
-	@Override
+	// ***********************************************************************************************************
+	// Section de code : Méthodes
+	// ***********************************************************************************************************
+
 	public String getDisplayValue() {
-		return this.nameEn;
+		return this.getNameEn();
 	}
 
-	@Override
-	public void setDisplayValue(String value) {
-		this.nameEn = value;
+	public LocalDate getReleaseDateAsLocalDate() {
+		return CastUtils.convertDateToLocalDate(this.getReleaseDate());
+	}
+
+	public Double getRatingAsDouble() {
+		return CastUtils.convertFloatToDouble(this.getRating());
+	}
+
+	public Boolean getWatchedAsBoolean() {
+		return CastUtils.convertIntegerToBoolean(this.getWatched());
+	}
+
+	public Boolean getOwnedAsBoolean() {
+		return CastUtils.convertIntegerToBoolean(this.getOwned());
+	}
+
+	public Boolean getLikedAsBoolean() {
+		return CastUtils.convertIntegerToBoolean(this.getLiked());
 	}
 
 	// ***********************************************************************************************************

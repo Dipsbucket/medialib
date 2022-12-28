@@ -40,12 +40,12 @@ public class SpectacleImageGridView extends AbstractEntityImageGridView<Spectacl
 	// ***********************************************************************************************************
 
 	@Override
-	protected String getContext() {
+	public String getContext() {
 		return ContextConstants.SPECTACLE_CONTEXT;
 	}
 
 	@Override
-	protected String getStyleClassName() {
+	public String getStyleClassName() {
 		return StyleConstants.CSS_VIEW_CLASS_NAME_SPECTACLE;
 	}
 

@@ -9,7 +9,7 @@ import com.application.server.repository.SpectacleRepository;
 import utils.CastUtils;
 
 @Service
-public class SpectacleService extends AbstractCrudService<Spectacle> {
+public class SpectacleService extends AbstractEntityService<Spectacle> {
 
 	// ***********************************************************************************************************
 	// Section de code : Constructeurs

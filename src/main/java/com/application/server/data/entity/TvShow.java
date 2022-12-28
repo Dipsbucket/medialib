@@ -1,87 +1,72 @@
 package com.application.server.data.entity;
 
-import java.time.LocalDate;
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import utils.CastUtils;
 
 @Entity
-@Table(name = "movie")
-public class Movie extends AbstractEntity {
-
-	public enum MovieGenre {
-		ACTION, ADVENTURE, ANIMATION, BIOGRAPHY, COMEDY, CRIME, DRAMA, FAMILY, FANTASY, HISTORY, HORROR, MUSICAL,
-		MYSTERY, ROMANCE, SCI_FI, SHORT, SPORT, THRILLER, WAR;
-	}
+@Table(name = "tv_show")
+public class TvShow extends AbstractEntity {
 
 	// ***********************************************************************************************************
 	// Section de code : Variables
 	// ***********************************************************************************************************
 
 	@Id
-	@Column(name = "MOVIE_ID")
+	@Column(name = "TV_SHOW_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(name = "MOVIE_NAME")
+	@Column(name = "TV_SHOW_NAME")
 	private String name;
 
-	@Column(name = "MOVIE_NAME_EN")
+	@Column(name = "TV_SHOW_NAME_EN")
 	private String nameEn;
 
-	@Column(name = "MOVIE_NAME_FR")
+	@Column(name = "TV_SHOW_NAME_FR")
 	private String nameFr;
 
-	@Column(name = "MOVIE_RELEASE_DATE")
-	@Temporal(TemporalType.DATE)
-	private Date releaseDate;
-
-	@Column(name = "MOVIE_GENRES")
-	private String genres;
-
-	@Column(name = "MOVIE_RATING")
+	@Column(name = "TV_SHOW_RATING")
 	private Float rating;
 
-	@Column(name = "MOVIE_WATCHED")
-	private Integer watched;
+	@Column(name = "TV_SHOW_RUNNING")
+	private Integer running;
 
-	@Column(name = "MOVIE_OWNED")
+	@Column(name = "TV_SHOW_SEASON_COUNT")
+	private Integer seasonCount;
+
+	@Column(name = "TV_SHOW_OWNED")
 	private Integer owned;
 
-	@Column(name = "MOVIE_LIKED")
+	@Column(name = "TV_SHOW_LIKED")
 	private Integer liked;
 
-	@Column(name = "MOVIE_LINK")
+	@Column(name = "TV_SHOW_LINK")
 	private String link;
 
-	@Column(name = "MOVIE_IMG_PATH")
+	@Column(name = "TV_SHOW_IMG_PATH")
 	private String imagePath;
 
 	// ***********************************************************************************************************
 	// Section de code : Constructeurs
 	// ***********************************************************************************************************
 
-	public Movie() {
+	public TvShow() {
 	}
 
-	public Movie(String name, String nameEn, String nameFr, Date releaseDate, String genres, Float rating,
-			Integer watched, Integer owned, Integer liked, String link, String imagePath) {
+	public TvShow(String name, String nameEn, String nameFr, Float rating, Integer running, Integer seasonCount,
+			Integer owned, Integer liked, String link, String imagePath) {
 		this.name = name;
 		this.nameEn = nameEn;
 		this.nameFr = nameFr;
-		this.releaseDate = releaseDate;
-		this.genres = genres;
 		this.rating = rating;
-		this.watched = watched;
+		this.running = running;
+		this.seasonCount = seasonCount;
 		this.owned = owned;
 		this.liked = liked;
 		this.link = link;
@@ -114,12 +99,12 @@ public class Movie extends AbstractEntity {
 
 	@Override
 	public String getPath() {
-		return this.getImagePath();
+		return this.imagePath;
 	}
 
 	@Override
 	public void setPath(String path) {
-		// Non Implémenté
+		this.imagePath = path;
 	}
 
 	// ***********************************************************************************************************
@@ -130,16 +115,8 @@ public class Movie extends AbstractEntity {
 		return this.getNameEn();
 	}
 
-	public LocalDate getReleaseDateAsLocalDate() {
-		return CastUtils.convertDateToLocalDate(this.getReleaseDate());
-	}
-
 	public Double getRatingAsDouble() {
 		return CastUtils.convertFloatToDouble(this.getRating());
-	}
-
-	public Boolean getWatchedAsBoolean() {
-		return CastUtils.convertIntegerToBoolean(this.getWatched());
 	}
 
 	public Boolean getOwnedAsBoolean() {
@@ -170,22 +147,6 @@ public class Movie extends AbstractEntity {
 		this.nameFr = nameFr;
 	}
 
-	public Date getReleaseDate() {
-		return this.releaseDate;
-	}
-
-	public void setReleaseDate(Date releaseDate) {
-		this.releaseDate = releaseDate;
-	}
-
-	public String getGenres() {
-		return this.genres;
-	}
-
-	public void setGenres(String genres) {
-		this.genres = genres;
-	}
-
 	public Float getRating() {
 		return this.rating;
 	}
@@ -194,12 +155,20 @@ public class Movie extends AbstractEntity {
 		this.rating = rating;
 	}
 
-	public Integer getWatched() {
-		return this.watched;
+	public Integer getRunning() {
+		return this.running;
 	}
 
-	public void setWatched(Integer watched) {
-		this.watched = watched;
+	public void setRunning(Integer running) {
+		this.running = running;
+	}
+
+	public Integer getSeasonCount() {
+		return this.seasonCount;
+	}
+
+	public void setSeasonCount(Integer seasonCount) {
+		this.seasonCount = seasonCount;
 	}
 
 	public Integer getOwned() {

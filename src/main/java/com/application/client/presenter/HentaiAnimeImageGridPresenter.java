@@ -2,16 +2,16 @@ package com.application.client.presenter;
 
 import org.springframework.stereotype.Component;
 
-import com.application.client.component.dialog.PornstarObjectView;
-import com.application.server.data.entity.Pornstar;
-import com.application.server.service.PornstarService;
+import com.application.client.component.dialog.HentaiAnimeObjectView;
+import com.application.server.data.entity.HentaiAnime;
+import com.application.server.service.HentaiAnimeService;
 
 import utils.CastUtils;
 
 @Component
-public class PornstarImageGridPresenter extends AbstractEntityImageGridPresenter<Pornstar> {
+public class HentaiAnimeImageGridPresenter extends AbstractEntityImageGridPresenter<HentaiAnime> {
 
-	public interface PornstarImageGridDisplay extends AbstractEntityImageGridDisplay<Pornstar> {
+	public interface HentaiAnimeImageGridDisplay extends AbstractEntityImageGridDisplay<HentaiAnime> {
 
 	}
 
@@ -19,7 +19,7 @@ public class PornstarImageGridPresenter extends AbstractEntityImageGridPresenter
 	// Section de code : Constructeurs
 	// ***********************************************************************************************************
 
-	public PornstarImageGridPresenter(PornstarService service) {
+	public HentaiAnimeImageGridPresenter(HentaiAnimeService service) {
 		super(service);
 	}
 
@@ -28,13 +28,13 @@ public class PornstarImageGridPresenter extends AbstractEntityImageGridPresenter
 	// ***********************************************************************************************************
 
 	@Override
-	public PornstarImageGridDisplay getView() {
+	public HentaiAnimeImageGridDisplay getView() {
 		return CastUtils.uncheckedCast(this.view);
 	}
 
 	@Override
-	protected PornstarObjectView createEntityObjectView() {
-		return new PornstarObjectView(this.getView().getContext());
+	protected HentaiAnimeObjectView createEntityObjectView() {
+		return new HentaiAnimeObjectView(this.getView().getContext());
 	}
 
 }

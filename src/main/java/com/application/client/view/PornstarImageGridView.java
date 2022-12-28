@@ -39,12 +39,12 @@ public class PornstarImageGridView extends AbstractEntityImageGridView<Pornstar>
 	// ***********************************************************************************************************
 
 	@Override
-	protected String getContext() {
+	public String getContext() {
 		return ContextConstants.PORNSTAR_CONTEXT;
 	}
 
 	@Override
-	protected String getStyleClassName() {
+	public String getStyleClassName() {
 		return StyleConstants.CSS_VIEW_CLASS_NAME_PORNSTAR;
 	}
 

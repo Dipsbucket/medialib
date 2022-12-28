@@ -5,8 +5,8 @@ import { applyTheme } from 'Frontend/generated/theme';
 import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators';
 
-@customElement('hentai-view')
-export class HentaiImageGridView extends LitElement {
+@customElement('hentai-artist-view')
+export class HentaiArtistImageGridView extends LitElement {
 	connectedCallback() {
 		super.connectedCallback();
 		// Apply the theme manually because of https://github.com/vaadin/flow/issues/11160
@@ -18,8 +18,8 @@ export class HentaiImageGridView extends LitElement {
 		<main class="max-w-screen-lg mx-auto pb-l px-l">
 			<vaadin-horizontal-layout class="items-center justify-between">
 				<vaadin-vertical-layout>
-					<h2 class="mb-0 mt-xl text-3xl">Hentais</h2>
-					<p class="mb-xl mt-0 text-secondary">One waifu simply isn't enough !</p>
+					<h2 class="mb-0 mt-xl text-3xl">Hentai Artists</h2>
+					<p class="mb-xl mt-0 text-secondary">Is it really art thought ?</p>
 				</vaadin-vertical-layout>
 				<vaadin-select label="Sort by" id="sortBy"></vaadin-select>
 			</vaadin-horizontal-layout>

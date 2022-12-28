@@ -17,6 +17,10 @@ public abstract class AbstractImageGridPresenter<T> {
 
 		void buildComponents();
 
+		String getContext();
+
+		String getStyleClassName();
+
 	}
 
 	// ***********************************************************************************************************
@@ -46,6 +50,11 @@ public abstract class AbstractImageGridPresenter<T> {
 		this.view = view;
 		this.view.setData(this.loadData());
 		this.view.buildComponents();
+		this.bind();
+	}
+
+	public void bind() {
+
 	}
 
 	// ***********************************************************************************************************

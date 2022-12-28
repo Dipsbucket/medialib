@@ -9,7 +9,7 @@ import com.application.server.repository.PornstarRepository;
 import utils.CastUtils;
 
 @Service
-public class PornstarService extends AbstractCrudService<Pornstar> {
+public class PornstarService extends AbstractEntityService<Pornstar> {
 
 	// ***********************************************************************************************************
 	// Section de code : Constructeurs

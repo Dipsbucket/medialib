@@ -2,6 +2,7 @@ package com.application.client.presenter;
 
 import org.springframework.stereotype.Component;
 
+import com.application.client.component.dialog.SpectacleObjectView;
 import com.application.server.data.entity.Spectacle;
 import com.application.server.service.SpectacleService;
 
@@ -29,6 +30,11 @@ public class SpectacleImageGridPresenter extends AbstractEntityImageGridPresente
 	@Override
 	public SpectacleImageGridDisplay getView() {
 		return CastUtils.uncheckedCast(this.view);
+	}
+
+	@Override
+	protected SpectacleObjectView createEntityObjectView() {
+		return new SpectacleObjectView(this.getView().getContext());
 	}
 
 }

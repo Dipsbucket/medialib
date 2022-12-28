@@ -34,4 +34,22 @@ public class ImageContainer extends LitTemplate {
 		this.image.addClassName(StyleConstants.CSS_CLASS_SIZING_FULL_PARENT_HEIGHT);
 		this.header.setText(title);
 	}
+
+	// ***********************************************************************************************************
+	// Section de code : Méthodes
+	// ***********************************************************************************************************
+
+	public void hideHeader() {
+		this.header.getStyle().set(StyleConstants.CSS_PROPERTY_DISPLAY_KEY,
+				StyleConstants.CSS_PROPERTY_DISPLAY_VALUE_NONE);
+	}
+
+	// ***********************************************************************************************************
+	// Section de code : Accesseurs
+	// ***********************************************************************************************************
+
+	public Image getImage() {
+		return this.image;
+	}
+
 }

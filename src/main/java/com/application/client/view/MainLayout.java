@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.application.client.component.HeaderContainer;
 import com.application.client.presenter.DocumentaryImageGridPresenter;
-import com.application.client.presenter.HentaiImageGridPresenter;
+import com.application.client.presenter.HentaiAnimeImageGridPresenter;
+import com.application.client.presenter.HentaiArtistImageGridPresenter;
+import com.application.client.presenter.JavImageGridPresenter;
 import com.application.client.presenter.MovieImageGridPresenter;
 import com.application.client.presenter.PornstarImageGridPresenter;
 import com.application.client.presenter.SpectacleImageGridPresenter;
@@ -49,11 +51,13 @@ public class MainLayout extends AppLayout {
 	private final AuthenticatedUser authenticatedUser;
 	private final AccessAnnotationChecker accessChecker;
 
-	private PornstarImageGridPresenter pornstarImageGridPresenter;
 	private MovieImageGridPresenter movieImageGridPresenter;
 	private DocumentaryImageGridPresenter documentaryImageGridPresenter;
-	private HentaiImageGridPresenter hentaiImageGridPresenter;
 	private SpectacleImageGridPresenter spectacleImageGridPresenter;
+	private PornstarImageGridPresenter pornstarImageGridPresenter;
+	private HentaiAnimeImageGridPresenter hentaiAnimeImageGridPresenter;
+	private HentaiArtistImageGridPresenter hentaiArtistImageGridPresenter;
+	private JavImageGridPresenter javImageGridPresenter;
 
 	private HeaderContainer header;
 
@@ -62,19 +66,26 @@ public class MainLayout extends AppLayout {
 	// ***********************************************************************************************************
 
 	public MainLayout(AuthenticatedUser authenticatedUser, AccessAnnotationChecker accessChecker,
-			@Autowired PornstarImageGridPresenter pornstarImageGridPresenter,
 			@Autowired MovieImageGridPresenter movieImageGridPresenter,
 			@Autowired DocumentaryImageGridPresenter documentaryImageGridPresenter,
-			@Autowired HentaiImageGridPresenter hentaiImageGridPresenter,
-			@Autowired SpectacleImageGridPresenter spectacleImageGridPresenter) {
+			@Autowired SpectacleImageGridPresenter spectacleImageGridPresenter,
+			@Autowired PornstarImageGridPresenter pornstarImageGridPresenter,
+			@Autowired HentaiAnimeImageGridPresenter hentaiAnimeImageGridPresenter,
+			@Autowired HentaiArtistImageGridPresenter hentaiArtistImageGridPresenter,
+			@Autowired JavImageGridPresenter javImageGridPresenter) {
 		this.authenticatedUser = authenticatedUser;
 		this.accessChecker = accessChecker;
 
-		this.pornstarImageGridPresenter = pornstarImageGridPresenter;
+		// User
 		this.movieImageGridPresenter = movieImageGridPresenter;
 		this.documentaryImageGridPresenter = documentaryImageGridPresenter;
-		this.hentaiImageGridPresenter = hentaiImageGridPresenter;
 		this.spectacleImageGridPresenter = spectacleImageGridPresenter;
+
+		// Admin
+		this.pornstarImageGridPresenter = pornstarImageGridPresenter;
+		this.hentaiAnimeImageGridPresenter = hentaiAnimeImageGridPresenter;
+		this.hentaiArtistImageGridPresenter = hentaiArtistImageGridPresenter;
+		this.javImageGridPresenter = javImageGridPresenter;
 
 		this.header = new HeaderContainer();
 
@@ -99,21 +110,30 @@ public class MainLayout extends AppLayout {
 	// ***********************************************************************************************************
 
 	private void manageViewsAfterNavigation(Component component) {
-		if (component instanceof PornstarImageGridView) {
-			final PornstarImageGridView view = CastUtils.uncheckedCast(component);
-			this.pornstarImageGridPresenter.initView(view);
-		} else if (component instanceof MovieImageGridView) {
+		// User
+		if (component instanceof MovieImageGridView) {
 			final MovieImageGridView view = CastUtils.uncheckedCast(component);
 			this.movieImageGridPresenter.initView(view);
 		} else if (component instanceof DocumentaryImageGridView) {
 			final DocumentaryImageGridView view = CastUtils.uncheckedCast(component);
 			this.documentaryImageGridPresenter.initView(view);
-		} else if (component instanceof HentaiImageGridView) {
-			final HentaiImageGridView view = CastUtils.uncheckedCast(component);
-			this.hentaiImageGridPresenter.initView(view);
 		} else if (component instanceof SpectacleImageGridView) {
 			final SpectacleImageGridView view = CastUtils.uncheckedCast(component);
 			this.spectacleImageGridPresenter.initView(view);
+		}
+		// Admin
+		else if (component instanceof PornstarImageGridView) {
+			final PornstarImageGridView view = CastUtils.uncheckedCast(component);
+			this.pornstarImageGridPresenter.initView(view);
+		} else if (component instanceof HentaiAnimeImageGridView) {
+			final HentaiAnimeImageGridView view = CastUtils.uncheckedCast(component);
+			this.hentaiAnimeImageGridPresenter.initView(view);
+		} else if (component instanceof HentaiArtistImageGridView) {
+			final HentaiArtistImageGridView view = CastUtils.uncheckedCast(component);
+			this.hentaiArtistImageGridPresenter.initView(view);
+		} else if (component instanceof JavImageGridView) {
+			final JavImageGridView view = CastUtils.uncheckedCast(component);
+			this.javImageGridPresenter.initView(view);
 		}
 	}
 
@@ -155,7 +175,9 @@ public class MainLayout extends AppLayout {
 				new MenuItemInfo("Documentaries", "la la-th-list", DocumentaryImageGridView.class),
 				new MenuItemInfo("Spectacles", "la la-th-list", SpectacleImageGridView.class),
 				new MenuItemInfo("Pornstars", "la la-th-list", PornstarImageGridView.class),
-				new MenuItemInfo("Hentais", "la la-th-list", HentaiImageGridView.class),
+				new MenuItemInfo("Hentais Anime", "la la-th-list", HentaiAnimeImageGridView.class),
+				new MenuItemInfo("Hentai Artists", "la la-th-list", HentaiArtistImageGridView.class),
+				new MenuItemInfo("Jav", "la la-th-list", JavImageGridView.class),
 				new MenuItemInfo("About", "la la-file", AboutView.class), //
 
 		};

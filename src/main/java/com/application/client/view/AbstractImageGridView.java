@@ -10,10 +10,6 @@ import com.vaadin.flow.component.template.Id;
 
 public abstract class AbstractImageGridView<T> extends LitTemplate implements AbstractImageGridDisplay<T> {
 
-	protected abstract String getContext();
-
-	protected abstract String getStyleClassName();
-
 	// ***********************************************************************************************************
 	// Section de code : Variables
 	// ***********************************************************************************************************

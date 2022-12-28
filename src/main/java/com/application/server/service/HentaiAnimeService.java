@@ -2,20 +2,20 @@ package com.application.server.service;
 
 import org.springframework.stereotype.Service;
 
-import com.application.server.data.entity.Movie;
+import com.application.server.data.entity.HentaiAnime;
 import com.application.server.repository.AbstractJpaRepository;
-import com.application.server.repository.MovieRepository;
+import com.application.server.repository.HentaiAnimeRepository;
 
 import utils.CastUtils;
 
 @Service
-public class MovieService extends AbstractEntityService<Movie> {
+public class HentaiAnimeService extends AbstractEntityService<HentaiAnime> {
 
 	// ***********************************************************************************************************
 	// Section de code : Constructeurs
 	// ***********************************************************************************************************
 
-	public MovieService(AbstractJpaRepository<Movie> repository) {
+	public HentaiAnimeService(AbstractJpaRepository<HentaiAnime> repository) {
 		super(repository);
 	}
 
@@ -24,7 +24,7 @@ public class MovieService extends AbstractEntityService<Movie> {
 	// ***********************************************************************************************************
 
 	@Override
-	protected MovieRepository getRepository() {
+	protected HentaiAnimeRepository getRepository() {
 		return CastUtils.uncheckedCast(this.repository);
 	}
 

@@ -40,12 +40,12 @@ public class DocumentaryImageGridView extends AbstractEntityImageGridView<Docume
 	// ***********************************************************************************************************
 
 	@Override
-	protected String getContext() {
+	public String getContext() {
 		return ContextConstants.DOCUMENTARY_CONTEXT;
 	}
 
 	@Override
-	protected String getStyleClassName() {
+	public String getStyleClassName() {
 		return StyleConstants.CSS_VIEW_CLASS_NAME_DOCUMENTARY;
 	}
 

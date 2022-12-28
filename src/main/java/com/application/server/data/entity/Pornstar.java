@@ -100,14 +100,12 @@ public class Pornstar extends AbstractEntity {
 		this.imagePath = path;
 	}
 
-	@Override
-	public String getDisplayValue() {
-		return this.name;
-	}
+	// ***********************************************************************************************************
+	// Section de code : Méthodes
+	// ***********************************************************************************************************
 
-	@Override
-	public void setDisplayValue(String value) {
-		this.name = value;
+	public String getDisplayValue() {
+		return this.getName();
 	}
 
 	// ***********************************************************************************************************

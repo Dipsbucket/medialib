@@ -2,6 +2,7 @@ package com.application.client.presenter;
 
 import org.springframework.stereotype.Component;
 
+import com.application.client.component.dialog.MovieObjectView;
 import com.application.server.data.entity.Movie;
 import com.application.server.service.MovieService;
 
@@ -29,6 +30,11 @@ public class MovieImageGridPresenter extends AbstractEntityImageGridPresenter<Mo
 	@Override
 	public MovieImageGridDisplay getView() {
 		return CastUtils.uncheckedCast(this.view);
+	}
+
+	@Override
+	protected MovieObjectView createEntityObjectView() {
+		return new MovieObjectView(this.getView().getContext());
 	}
 
 }
